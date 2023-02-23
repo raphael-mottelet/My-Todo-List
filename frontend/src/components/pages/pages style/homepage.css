@@ -1,0 +1,46 @@
+.home-container{
+    font-size: 1cm;
+    height: 26cm;
+    background: #8A2387;
+    background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);
+    background: linear-gradient(to right, #F27121, #E94057, #8A2387); 
+    }
+    
+    .todo-container {
+        display: flex; /* Use flexbox to center the child elements horizontally and vertically */
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Set the height of the container to the full viewport height */
+    }
+      
+      .todo-content {
+        display: flex; /* Use flexbox to horizontally align the child elements */
+        align-items: center; /* Center the child elements vertically */
+        margin: 0 10px; /* Add some margin around the child elements */
+
+        border-left: 1px solid black; /* Add a black border to the box */
+        border-right: 1px solid black; /* Add a black border to the box */
+        border-bottom: 1px solid black; /* Add a black border to the box */
+        border-top: 1px solid black; /* Add a black border to the box */
+
+        padding: 10px; /* Add some padding around the box */
+        display: flex; 
+        align-items: center;
+      }
+      
+      .todo-content input,
+      .todo-content .todo-li,
+      .todo-content .home-button {
+        display: inline-block; /* Display the child elements on the same line */
+        vertical-align: middle; /* Vertically align the child elements */
+        margin-right: 10px; /* Add some margin between the child elements */
+      }
+      
+      .todo-content .home-button button {
+        margin-left: 10px; /* Add some margin between the home button and the previous element */
+      }
+      
+
+.todo-li {
+    list-style: none;
+}
