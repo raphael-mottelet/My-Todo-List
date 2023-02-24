@@ -3,6 +3,7 @@ import { active } from 'd3';
 import React, {useEffect, useState} from 'react';
 
 import './pages style/homepage.css';
+import './pages style/button-styling.css';
 
 function Homepage() {
 
@@ -22,6 +23,17 @@ function Homepage() {
       .catch (err => {
         console.error(err);
       })
+  }
+
+  const todoMarkStatus = task => {
+    axios.put(url+ `todo/${task.id}/update/`,{
+      'title': task.title,
+      'status': !task.status
+    }).then(res => {
+      getAllTodos()
+    }).then(err => {
+      console.error(err)
+    })
   }
 
 
@@ -83,6 +95,7 @@ function Homepage() {
   useEffect(() => {
     getAllTodos()
   },[])
+
   
   return (
     <div className='home-container'>
@@ -120,16 +133,12 @@ function Homepage() {
 
               return (
                 <div className='todo-content'>
-                  <input type="checkbox" className='todo-checkbox'/>
-
-                  <li
-                    className='todo-li'>
+                  <input type="checkbox" onChange={e => {todoMarkStatus(task)}} className='todo-checkbox'/>
                       {
                         task.status ?
-                        <strike>{task.title}</strike>
-                        :task.title
+                          <strike>{task.title}</strike>
+                          :task.title
                       }
-                  </li>
 
                   <div className='home-button'>
                     <button 
