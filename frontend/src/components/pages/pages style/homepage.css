@@ -54,26 +54,26 @@
     
     
     .todo-container {
-        display: flex; /* Use flexbox to center the child elements horizontally and vertically */
+        display: flex; /* code styling the main items container */
         justify-content: center;
         align-items: center;
-        height: 100vh; /* Set the height of the container to the full viewport height */
-        margin-top: -450px;
+        height: 100vh; 
+        margin-top: -600px;
     
       }
       
       .todo-content {
-        display: flex; /* Use flexbox to horizontally align the child elements */
-        align-items: center; /* Center the child elements vertically */
-        margin: 0 10px; /* Add some margin around the child elements */
+        display: flex; 
+        align-items: center; 
+        margin: 0 10px;
         margin-top: 5px;
         height: 1.8cm;
         
         border-radius: 10px;
-        border-left: 1px solid black; /* Add a black border to the box */
-        border-right: 1px solid black; /* Add a black border to the box */
-        border-bottom: 1px solid black; /* Add a black border to the box */
-        border-top: 1px solid black; /* Add a black border to the box */
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
 
         display: flex; 
         align-items: center;
@@ -89,13 +89,13 @@
       .todo-content input,
       .todo-content .todo-li,
       .todo-content .home-button {
-        display: inline-block; /* Display the child elements on the same line */
-        vertical-align: middle; /* Vertically align the child elements */
-        margin-right: 10px; /* Add some margin between the child elements */
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
       }
       
       .todo-content .home-button button {
-        margin-left: 10px; /* Add some margin between the home button and the previous element */
+        margin-left: 10px;
       }
       
 

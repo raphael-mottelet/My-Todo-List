@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
 from .models import Todo
 from .serializers import TodoSerializer
@@ -19,5 +19,9 @@ class UpdateTodoView(UpdateAPIView):
     serializer_class = TodoSerializer
 
 class DestroyTodoView(DestroyAPIView):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
+
+class TodoDetails(RetrieveAPIView):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer

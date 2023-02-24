@@ -8,6 +8,6 @@ urlpatterns = [
     path('add/', views.CreateTodoView.as_view(), name='add_todo'),
     path('<pk>/update/', views.UpdateTodoView.as_view(), name='update_todo'),
     path('<pk>/destroy/', views.DestroyTodoView.as_view(), name='destroy_todo'),
-
+    path('<pk>/details/', views.TodoDetails.as_view(), name='todo_details'),
 
 ]

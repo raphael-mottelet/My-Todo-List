@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { active } from 'd3';
 import React, {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
+
 
 import './pages style/homepage.css';
 import './pages style/button-styling.css';
@@ -96,6 +98,15 @@ function Homepage() {
     getAllTodos()
   },[])
 
+
+/*     
+
+Link supposed to send the user to the view 
+
+<Link to={`/todo/${task.id}`}>                   
+  <button className="todo-delete"></button>
+</Link>
+  */
   
   return (
     <div className='home-container'>
@@ -147,11 +158,14 @@ function Homepage() {
                     <button className="todo-delete" onClick={e => {deleteTodo(task)}}>
                       Delete
                     </button>
+
                   </div>
                 </div>
               )
+              
             })
           }
+          
         </ul>
       </div>
     </div>
