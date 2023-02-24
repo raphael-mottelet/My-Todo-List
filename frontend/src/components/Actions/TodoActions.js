@@ -14,7 +14,7 @@ import {
     TODO_CREATE_REVIEW_RESET,
 } from '../Constants/TodoConstants'
 
-export const listTODOs = () => async (dispatch) => {
+export const listTodo = () => async (dispatch) => {
     try {
         dispatch({type: TODO_LIST_REQUEST})
 

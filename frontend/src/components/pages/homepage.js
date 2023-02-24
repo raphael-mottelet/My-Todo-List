@@ -1,16 +1,22 @@
 import axios from 'axios'
+import { active } from 'd3';
 import React, {useEffect, useState} from 'react';
 
 import './pages style/homepage.css';
 
 function Homepage() {
 
-  const url = 'http://127.0.0.1:8000/'
-  const [tasks, setTasks] = useState([]);
-  const getAllTask = () => {
+  const url = 'http://127.0.0.1:8000/';
+  const [todos, setTodos] = useState([]);
+
+  const [inputTodo, setInputTodo] = useState('');
+  const [inputTodoDescription, setInputTodoDescription] = useState('');
+  const [activeTodo, setactiveTodo] = useState(null);
+
+  const getAllTodos = () => {
     axios.get(url + 'todo/list/')
       .then(res => {
-        setTasks(res.data)
+        setTodos(res.data)
         console.log(res.data)
       })
       .catch (err => {
@@ -18,32 +24,120 @@ function Homepage() {
       })
   }
 
+
+  const addTodo= () => {
+
+    if(activeTodo == null) {
+
+    axios.post(url+ 'todo/add/',{
+      'title': inputTodo,
+      'description': inputTodoDescription,
+      'status': false
+    }).then(res => {
+      getAllTodos()
+    }).then(err => {
+      console.error(err)
+    })
+
+  }else{
+
+    axios.put(url+ `todo/${activeTodo.id}/update/`,{
+      'title': inputTodo,
+      'description': inputTodoDescription,
+      'status': activeTodo.status
+    }).then(res => {
+      setInputTodo()
+      setInputTodoDescription()
+      getAllTodos()
+    }).then(err => {
+      console.error(err)
+    })
+  }}
+
+  const updateTodo = task => {
+    setactiveTodo(task)
+    setInputTodo(task.title)
+    setInputTodoDescription(task.description)
+  }
+
+  const deleteTodo = task => {
+    axios.delete(url+`todo/${task.id}/destroy/`)
+    .then(res => {
+      getAllTodos()
+    })
+    .catch(err => {
+      console.error(err)
+    })
+  }
+
+  const handleChange =(e) => {
+    setInputTodo(e.target.value)
+    console.log(inputTodo)
+  }
+
+  const DescriptionChange =(f) => {
+    setInputTodoDescription(f.target.value)
+    console.log(inputTodoDescription)
+  }
+
   useEffect(() => {
-    getAllTask()
+    getAllTodos()
   },[])
   
   return (
     <div className='home-container'>
-      <header className="todo-header">
-        Header
-      </header>
 
-      <div className='todo-input'>
-          <input type="text" placeholder="Ajoutez un Todo"/>
-          <button className='todo-field'> Valider</button>
+        <div className='form-container'>
+          <div className='todo-input'>
+            <input 
+              type="text" 
+              placeholder="Ajoutez un Todo"
+              value={inputTodo}
+              onChange={e => handleChange(e)}
+              />
+
+            <input 
+              type="text" 
+              placeholder="Ajoutez une description"
+              value={inputTodoDescription}
+              onChange={f => DescriptionChange(f)}
+              />
+
+            <button 
+                onClick={addTodo} 
+                diseabled={!inputTodo.trim()}
+                className='todo-field'>
+
+              Valider
+            </button>
+          </div>
         </div>
+
       <div className='todo-container'>
         <ul>
           {
-            tasks.map(task => {
+            todos.map(task => {
 
               return (
                 <div className='todo-content'>
                   <input type="checkbox" className='todo-checkbox'/>
-                  <li className='todo-li'>{task.title}</li>
+
+                  <li
+                    className='todo-li'>
+                      {
+                        task.status ?
+                        <strike>{task.title}</strike>
+                        :task.title
+                      }
+                  </li>
+
                   <div className='home-button'>
-                    <button className='todo-edit'>Edit</button>
-                    <button classname="todo-delete">Delete</button>
+                    <button 
+                      onClick={e => updateTodo(task)} 
+                      className='todo-edit'>Edit</button>
+                    <button className="todo-delete" onClick={e => {deleteTodo(task)}}>
+                      Delete
+                    </button>
                   </div>
                 </div>
               )
